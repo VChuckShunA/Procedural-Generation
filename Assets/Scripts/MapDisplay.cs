@@ -13,7 +13,9 @@ public class MapDisplay : MonoBehaviour
 
         Texture2D texture = new Texture2D(width, height);
 
+        //Genreate a colour array
         Color[] colourMap = new Color[width * height];
+        //loop through the values in our noisemap
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
@@ -21,9 +23,11 @@ public class MapDisplay : MonoBehaviour
                 colourMap[y * width + x] = Color.Lerp(Color.black, Color.white, noiseMap[x, y]);
             }
         }
+        //Apply the colours to the texture
         texture.SetPixels(colourMap);
         texture.Apply();
 
+        //using shared materials so we can see the effects in the editor
         textureRender.sharedMaterial.mainTexture = texture;
         textureRender.transform.localScale = new Vector3(width, 1, height);
     }
